@@ -1,0 +1,59 @@
+PRACT 6- Data Analytics III 1. Implement Simple Naïve Bayes algo on iris.csvdataset. 2. Compute Confusion matrix to find TP, FP, TN, FN, Accuracy, Error rate, Precision,Recall on the given dataset
+
+
+
+import pandas as pd
+ import numpy as np 
+import seaborn as sns 
+import matplotlib.pyplot as plt
+ 
+iris = pd.read_csv("iris.csv") 
+iris.head(5)
+
+iris.dtypes
+
+from sklearn import preprocessing
+ enc = preprocessing.OneHotEncoder()
+ enc_iris = pd.DataFrame(enc.fit_transform(iris[['sepal_length']]).t
+ oarray())
+ enc_iris
+
+from sklearn.preprocessing import LabelEncoder
+ le = LabelEncoder() 
+iris['species'] = le.fit_transform(iris['species'])
+ newiris=iris 
+iris.head(7)
+
+iris.isnull().head(5)
+
+x = iris.iloc[:, :-1].values 
+print(x)
+
+y = iris.iloc[:, -1].values 
+print(y)
+
+x = iris.drop(['sepal_length'], axis = 1) 
+y = iris['sepal_length']
+
+from sklearn.model_selection import train_test_split
+ xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size =0. 
+2,random_state = 0)
+ 
+ from sklearn.naive_bayes import GaussianNB 
+gaussian = GaussianNB() 
+gaussian.fit(X_train, y_train)
+
+Y_pred = gaussian.predict(X_test)
+
+from sklearn.metrics import confusion_matrix, accuracy_score, preci sion_score, recall_score 
+cm = confusion_matrix(y_test,Y_pred) 
+print(cm)
+
+ac = accuracy_score(y_test,Y_pred) 
+print(ac)
+
+precision =precision_score(y_test, Y_pred,average='micro') 
+print(precision)
+
+recall =recall_score(y_test, Y_pred,average='micro') 
+print(recall)
