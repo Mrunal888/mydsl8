@@ -1,0 +1,55 @@
+PRACT 9- Data Visualization II 1. Use inbuilt dataset 'titanic' Plot a box plot for distribution of age with respect to each gender along with.. (Column names : 'sex' and 'age') 2.Write observations on the inference from the above statistics
+
+
+
+import pandas as pd 
+import numpy as np
+ import matplotlib.pyplot as plt
+ import seaborn as sns 
+from seaborn import load_dataset
+
+ dataset = sns.load_dataset("titanic")
+
+ dataset.head() 
+
+tips = load_dataset("tips")
+
+ tips.head()
+
+sns.countplot(dataset['survived'])
+ plt.show()
+
+ dataset['sex'].value_counts().plot(kind="pie", autopct="%.2f")
+plt.show()
+
+ plt.hist(dataset['pclass'], bins=5)
+ plt.show()
+
+sns.distplot(dataset['pclass'])
+ plt.show()
+
+ plt.scatter(tips["total_bill"], tips["tip"])
+ plt.show()
+
+sns.barplot(dataset['pclass'], dataset['age'])
+ plt.show()
+
+ sns.barplot(dataset['pclass'], dataset['fare'], hue = dataset["sex"]) 
+plt.show() 
+
+sns.boxplot(dataset['sex'], dataset["age"])
+ plt.show()
+
+sns.boxplot(dataset['sex'], dataset["age"], dataset["survived"])
+ plt.show()
+
+sns.distplot(dataset[dataset['survived'] == 0]['age'], hist=False, color=”blue”) sns.distplot(dataset[dataset['survived'] == 1]['age'], hist=False, color =”orange)
+plt.show()
+
+pd.crosstab(dataset['pclass'], dataset['survived'])
+
+sns.heatmap(pd.crosstab(dataset['pclass'], dataset['survived'])) 
+plt.show()
+
+ sns.clustermap(pd.crosstab(dataset['parch'], dataset['survived'])) 
+plt.show()
